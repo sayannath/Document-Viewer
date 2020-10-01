@@ -28,7 +28,22 @@ class _HomePageState extends State<HomePage> {
   PDFDocument _doc;
   bool _loading;
 
+  @override
+  void initState() { 
+    super.initState();
+    _initPdf();
+  }
 
+  _initPdf() async {
+    setState(() {
+      _loading = true;
+    });
+    final doc = await PDFDocument.fromURL(url);
+    setState(() {
+      _doc=doc;
+      _loading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
